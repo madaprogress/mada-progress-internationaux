@@ -1,0 +1,12 @@
+{
+  "name": "mad-progress-internationaux",
+  "version": "1.0.0",
+  "description": "Backend de MAD Progress Internationaux",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
