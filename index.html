@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAD Progress Internationaux</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f4fa;color:#17233d;font-family:Arial,sans-serif}
+header{background:#102653;color:white;padding:22px 16px;text-align:center}
+.logo{font-size:27px;font-weight:bold;color:#f5c542}
+header p{margin:8px 0 0;font-size:13px}
+nav{display:flex;overflow:auto;background:#fff;padding:10px;gap:8px;position:sticky;top:0}
+nav button{border:0;background:#e8edf7;padding:11px 14px;border-radius:8px;white-space:nowrap}
+main{max-width:900px;margin:auto;padding:15px}
+section{background:white;padding:18px;margin:14px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2{color:#17366c;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.card{background:#f3f6fc;padding:15px;border-radius:10px;border:1px solid #e1e7f2}
+.card h3{margin:0 0 10px;color:#17366c}
+.price{font-size:22px;font-weight:bold;color:#b8860b}
+button.primary{background:#17366c;color:white;border:0;padding:12px 18px;border-radius:8px}
+input,select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #ccd5e5;border-radius:8px}
+small{color:#66748d}
+.hidden{display:none}
+footer{text-align:center;padding:25px;color:#66748d}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">€ $ £ ¥</div>
+ <h1>MAD Progress Internationaux</h1>
+ <p>Plateforme internationale de services et de récompenses</p>
+</header>
+
+<nav>
+ <button onclick="show('dashboard')">Accueil</button>
+ <button onclick="show('vip')">VIP</button>
+ <button onclick="show('wallet')">Wallet</button>
+ <button onclick="show('transactions')">Historique</button>
+ <button onclick="show('support')">Support</button>
+</nav>
+
+<main>
+
+<section id="dashboard">
+ <h2>Tableau de bord</h2>
+ <p>Bienvenue sur MAD Progress Internationaux.</p>
+ <div class="grid">
+  <div class="card">
+   <small>Mon compte</small>
+   <h3 id="member">Non connecté</h3>
+  </div>
+  <div class="card">
+   <small>Mon niveau VIP</small>
+   <h3 id="level">Aucun</h3>
+  </div>
+  <div class="card">
+   <small>Mon portefeuille</small>
+   <h3>En attente de connexion sécurisée</h3>
+  </div>
+ </div>
+ <h3>Créer un compte</h3>
+ <form onsubmit="register(event)">
+  <label>Nom complet</label>
+  <input id="fullname" required placeholder="Votre nom">
+  <label>Adresse e-mail</label>
+  <input id="email" type="email" required placeholder="Votre e-mail">
+  <label>Mot de passe</label>
+  <input id="password" type="password" required minlength="8" placeholder="8 caractères minimum">
+  <button class="primary">Créer mon compte</button>
+ </form>
+ <small>Cette interface ne crée pas encore de compte sécurisé sur un serveur.</small>
+</section>
+
+<section id="vip" class="hidden">
+ <h2>Nos niveaux VIP</h2>
+ <p>Choisissez un niveau selon les conditions du programme.</p>
+ <div class="grid" id="viplist"></div>
+ <p><small>Les montants affichés sont des tarifs proposés. Aucun revenu ni rendement n'est garanti.</small></p>
+</section>
+
+<section id="wallet" class="hidden">
+ <h2>Wallet international</h2>
+ <label>Devise</label>
+ <select id="currency">
+  <option>USD ($)</option>
+  <option>EUR (€)</option>
+  <option>GBP (£)</option>
+  <option>JPY (¥)</option>
+  <option>MGA (Ar)</option>
+ </select>
+ <div class="card">
+  <small>Solde disponible</small>
+  <h2>Non disponible</h2>
+  <small>Le portefeuille sera activé après installation du serveur sécurisé.</small>
+ </div>
+ <h3>Demande de dépôt</h3>
+ <form onsubmit="requestPayment(event,'Dépôt')">
+  <label>Montant</label>
+  <input type="number" min="1" required placeholder="Montant">
+  <label>Moyen de paiement</label>
+  <select required>
+   <option value="">Choisir</option>
+   <option>MVola</option>
+   <option>Airtel Money</option>
+   <option>Yas</option>
+  </select>
+  <button class="primary">Envoyer une demande</button>
+ </form>
+ <h3>Demande de retrait</h3>
+ <form onsubmit="requestPayment(event,'Retrait')">
+  <label>Montant</label>
+  <input type="number" min="1" required placeholder="Montant">
+  <label>Votre numéro de paiement</label>
+  <input required placeholder="Numéro du compte">
+  <button class="primary">Demander un retrait</button>
+ </form>
+ <small>Les demandes ne transfèrent pas d'argent. Une connexion réelle aux opérateurs et une validation sécurisée sont nécessaires.</small>
+</section>
+
+<section id="transactions" class="hidden">
+ <h2>Historique</h2>
+ <p>Aucune transaction enregistrée.</p>
+</section>
+
+<section id="support" class="hidden">
+ <h2>Centre d'assistance</h2>
+ <p>Besoin d'aide ? Contactez notre équipe.</p>
+ <form onsubmit="event.preventDefault();alert('Le support doit encore être connecté au serveur.')">
+  <label>Votre e-mail</label>
+  <input type="email" required placeholder="Votre e-mail">
+  <label>Votre message</label>
+  <input required placeholder="Écrivez votre message">
+  <button class="primary">Envoyer</button>
+ </form>
+</section>
+
+</main>
+
+<footer>
+ MAD Progress Internationaux © 2026
+</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+}
+const tiers=[
+ ['VIP 1','$15'],['VIP 2','$45'],['VIP 3','$100'],
+ ['S1','$300'],['S2','$850'],['S3','$1,200'],
+ ['A1 👸','$2,000'],['Z14 🦁','$7,000'],['U20 👑','$20,000']
+];
+document.getElementById('viplist').innerHTML=tiers.map(t=>`
+ <div class="card">
+  <h3>${t[0]}</h3>
+  <div class="price">${t[1]}</div>
+  <p><small>Conditions à confirmer</small></p>
+  <button class="primary" onclick="chooseVIP('${t[0]}')">Choisir</button>
+ </div>`).join('');
+
+function register(e){
+ e.preventDefault();
+ const name=document.getElementById('fullname').value;
+ document.getElementById('member').textContent=name;
+ alert('Interface : inscription reçue. Le compte doit être enregistré sur le serveur sécurisé.');
+}
+function chooseVIP(level){
+ alert('Niveau choisi : '+level+'. La validation nécessite le serveur et une vérification réelle.');
+}
+function requestPayment(e,type){
+ e.preventDefault();
+ alert('Demande de '+type+' préparée. Aucun argent ne sera transféré tant que le système de paiement sécurisé ne sera pas connecté.');
+}
+</script>
+</body>
+</html>
