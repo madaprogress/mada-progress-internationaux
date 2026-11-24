@@ -174,6 +174,96 @@ function requestPayment(e,type){
  e.preventDefault();
  alert('Demande de '+type+' préparée. Aucun argent ne sera transféré tant que le système de paiement sécurisé ne sera pas connecté.');
 }
+</script><div style="text-align:center;padding:15px">
+  <label for="siteLanguage">🌐 Langue / Fiteny :</label>
+  <select id="siteLanguage" onchange="changeLanguage(this.value)">
+    <option value="mg">🇲🇬 Malagasy</option>
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="pt">🇵🇹 Português</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="it">🇮🇹 Italiano</option>
+    <option value="zh">🇨🇳 中文</option>
+    <option value="ja">🇯🇵 日本語</option>
+  </select>
+</div>
+
+<script>
+const languages = {
+ mg: {
+  welcome:"Tongasoa eto amin'ny MAD Progress Internationaux",
+  home:"Fandraisana", vip:"Ambaratonga VIP",
+  wallet:"Wallet", history:"Tantara",
+  support:"Fanampiana", register:"Mamorona kaonty"
+ },
+ fr: {
+  welcome:"Bienvenue sur MAD Progress Internationaux",
+  home:"Accueil", vip:"Niveaux VIP",
+  wallet:"Portefeuille", history:"Historique",
+  support:"Assistance", register:"Créer un compte"
+ },
+ en: {
+  welcome:"Welcome to MAD Progress Internationaux",
+  home:"Home", vip:"VIP Levels",
+  wallet:"Wallet", history:"History",
+  support:"Support", register:"Create Account"
+ },
+ es: {
+  welcome:"Bienvenido a MAD Progress Internationaux",
+  home:"Inicio", vip:"Niveles VIP",
+  wallet:"Cartera", history:"Historial",
+  support:"Ayuda", register:"Crear cuenta"
+ },
+ pt: {
+  welcome:"Bem-vindo ao MAD Progress Internationaux",
+  home:"Início", vip:"Níveis VIP",
+  wallet:"Carteira", history:"Histórico",
+  support:"Suporte", register:"Criar conta"
+ },
+ de: {
+  welcome:"Willkommen bei MAD Progress Internationaux",
+  home:"Startseite", vip:"VIP-Stufen",
+  wallet:"Wallet", history:"Verlauf",
+  support:"Hilfe", register:"Konto erstellen"
+ },
+ it: {
+  welcome:"Benvenuto su MAD Progress Internationaux",
+  home:"Home", vip:"Livelli VIP",
+  wallet:"Portafoglio", history:"Cronologia",
+  support:"Assistenza", register:"Crea account"
+ },
+ zh: {
+  welcome:"欢迎来到 MAD Progress Internationaux",
+  home:"首页", vip:"VIP等级",
+  wallet:"钱包", history:"历史记录",
+  support:"帮助", register:"创建账户"
+ },
+ ja: {
+  welcome:"MAD Progress Internationauxへようこそ",
+  home:"ホーム", vip:"VIPレベル",
+  wallet:"ウォレット", history:"履歴",
+  support:"サポート", register:"アカウント作成"
+ }
+};
+
+function changeLanguage(lang) {
+ const t = languages[lang];
+ document.querySelectorAll("nav button").forEach((b,i)=>{
+  const keys=["home","vip","wallet","history","support"];
+  if(keys[i]) b.textContent=t[keys[i]];
+ });
+ document.querySelector("#dashboard h2").textContent=t.welcome;
+ document.querySelector("#vip h2").textContent=t.vip;
+ document.querySelector("#wallet h2").textContent=t.wallet;
+ document.querySelector("#transactions h2").textContent=t.history;
+ document.querySelector("#support h2").textContent=t.support;
+ localStorage.setItem("madLanguage",lang);
+}
+
+const savedLanguage=localStorage.getItem("madLanguage") || "mg";
+document.getElementById("siteLanguage").value=savedLanguage;
+changeLanguage(savedLanguage);
 </script>
 </body>
 </html>
